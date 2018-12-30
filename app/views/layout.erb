@@ -9,4 +9,7 @@
     <%= yield %>
 
   </body>
+  <footer>
+    <a href="/users/logout"><%= "Logout" if is_loggedin? %></a>
+  </footer>
 </html>

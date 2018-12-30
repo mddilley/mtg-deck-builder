@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   post '/users/login' do
-    binding.pry
     @user = User.find_by(:username => params["username"])
     if !is_loggedin?
       login(params)
@@ -35,6 +34,11 @@ class UsersController < ApplicationController
     else
       erb :"/decks/show"
     end
+  end
+
+  get '/users/logout' do
+    logout
+    redirect to "/users/login"
   end
 
 end
