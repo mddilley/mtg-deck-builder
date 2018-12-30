@@ -1,1 +1,13 @@
 <h1>Your Decks</h1>
+
+<% @user.decks.each do |deck| %>
+
+  <div class="deck">
+    <p>Deck Name: <%= deck.name %></p>
+
+    <p>Deck Color(s): <%= deck.color %></p>
+
+    <p>Deck Size: <%= deck.size %> cards </p>
+  </div>
+
+<% end %>

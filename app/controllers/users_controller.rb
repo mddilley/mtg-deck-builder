@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params["username"])
     if !is_loggedin?
       login(params)
-      erb :"/users/login"
+      erb :"/decks/show"
     else
       erb :"/decks/show"
     end
