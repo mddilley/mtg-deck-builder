@@ -29,6 +29,8 @@ class ApplicationController < Sinatra::Base
       User.find_by(session[:id])
     end
 
+
+
   end
 
 end

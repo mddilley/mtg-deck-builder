@@ -28,11 +28,11 @@ class UsersController < ApplicationController
 
   post '/users/login' do
     @user = User.find_by(:username => params["username"])
-    if !is_loggedin?
-      login(params)
+    if !!@user && !!@user.authenticate(params[:password])
+      session[:id] = @user.id
       erb :"/decks/show"
     else
-      erb :"/decks/show"
+      redirect to :"/users/login"
     end
   end
 
