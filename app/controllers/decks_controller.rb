@@ -8,6 +8,11 @@ class DecksController < ApplicationController
     end
   end
 
+  get '/decks' do
+    @user = current_user
+    erb :"/decks/show"
+  end
+
   post '/decks' do
     @deck = Deck.create(params)
     @user = current_user

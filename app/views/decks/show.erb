@@ -2,9 +2,12 @@
 
 <h1>Your Decks</h1>
 
-<% @user.decks.each do |deck| %>
+<% @user.decks.each_with_index do |deck, i| %>
 
   <div class="deck">
+
+    <h3>Deck# <%= i + 1  %></h3>
+
     <p>Deck Name: <%= deck.name %></p>
 
     <p>Deck Color(s): <%= deck.color %></p>
