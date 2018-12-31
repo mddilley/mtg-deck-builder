@@ -3,8 +3,9 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    enable :sessions
-    set :sessions_secret, "35cbcfd4aa24ac8ed4cfc49f7baeb022"
+    use Rack::Session::Cookie, :key => 'rack.session',
+                           :path => '/',
+                           :secret => '35cbcfd4aa24ac8ed4cfc49f7baeb022'
   end
 
   get '/' do
@@ -28,8 +29,6 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find_by(session[:id])
     end
-
-
 
   end
 

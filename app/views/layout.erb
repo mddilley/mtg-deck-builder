@@ -10,6 +10,8 @@
 
   </body>
   <footer>
-    <a href="/users/logout"><%= "Logout" if is_loggedin? %></a>
+      <p>
+        <a href="/users/logout"><button type="button" name="button"> <%= "Logout" if is_loggedin? %></button></a>
+      </p>
   </footer>
 </html>

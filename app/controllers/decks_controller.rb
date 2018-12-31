@@ -10,6 +10,8 @@ class DecksController < ApplicationController
 
   post '/decks' do
     @deck = Deck.create(params)
+    @user = current_user
+    @user.decks << @deck
     if is_loggedin?
       erb :"/decks/show"
     else
