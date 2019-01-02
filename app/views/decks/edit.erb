@@ -1,0 +1,32 @@
+<form action="/decks/<%= @deck.id %>" method="post">
+
+  <input type="hidden" id="hidden" name="_method" value="patch">
+
+  <p>
+    Deck Name: <%= @deck.name %>
+  </p>
+  <p>
+    <label for="name">Edit Deck Name: </label>
+    <input type="text" id="name" name="name">
+  </p>
+
+  <!-- Add button inputs collected in array, .join to convert to string -->
+  <p>
+    Deck Color(s): <%= @deck.color %>
+  </p>
+  <p>
+    <label for="color">Edit Deck Color(s): </label>
+    <input type="text" id="color" name="color">
+  </p>
+
+  <p>
+    Deck Size: <%= @deck.size %>
+  </p>
+  <p>
+    <label for="size">Deck Size: </label>
+    <input type="text" id="size" name="size">
+  </p>
+
+  <input type="submit" value="Edit Deck">
+
+</form>
