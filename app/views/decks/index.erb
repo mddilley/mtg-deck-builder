@@ -1,0 +1,25 @@
+<h1>Your Decks</h1>
+
+<a href="/decks/new">Create a New Deck</a>
+
+<% @user.decks.each_with_index do |deck, i| %>
+
+  <div class="deck">
+
+    <h3>Deck# <%= i + 1  %></h3>
+
+    <p>Deck Name: <%= deck.name %></p>
+
+    <p>Deck Color(s): <%= deck.color %></p>
+
+    <p>Deck Size: <%= deck.size %> cards </p>
+
+    <a href="/decks/<%= deck.id %>/edit"><button type="button" name="button">Edit Deck</button></a>
+    <p></p>
+    <form action="/decks/<%=deck.id%>" method="post">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Deck" id="Delete Deck">
+    </form>
+  </div>
+
+<% end %>

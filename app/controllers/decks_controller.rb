@@ -10,7 +10,7 @@ class DecksController < ApplicationController
 
   get '/decks' do
     @user = current_user
-    erb :"/decks/show"
+    erb :"/decks/index"
   end
 
   post '/decks' do
@@ -27,6 +27,11 @@ class DecksController < ApplicationController
   get '/decks/:id/edit' do
     @deck = Deck.find(params[:id])
     erb :"/decks/edit"
+  end
+
+  get '/decks/:id' do
+    @deck = Deck.find(params[:id])
+    erb :"/decks/show"
   end
 
   patch '/decks/:id' do
