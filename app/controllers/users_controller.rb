@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if !is_loggedin?
       erb :"/users/signup"
     else
-      erb :"/decks/show"
+      redirect to :"/decks"
     end
   end
 
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if !is_loggedin?
       @user = User.create(params)
       login(@user.id)
-      erb :"/decks/show"
+      erb :"/decks/index"
     else
       redirect to "/"
     end
