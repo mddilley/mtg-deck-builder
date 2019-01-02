@@ -74,7 +74,6 @@ class DecksController < ApplicationController
         card.img_url = c["image_uris"]["normal"]
         c["power"] ? card.power = c["power"] : card.power = "n/a"
         c["toughness"] ? card.toughness = c["toughness"] : card.toughness = "n/a"
-        binding.pry
         deck.cards << card
       end
       redirect to "/decks"
