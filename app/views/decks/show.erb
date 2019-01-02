@@ -1,8 +1,26 @@
-<p>Deck Name: <%= @deck.name %></p>
+<h3>Deck Name: <%= @deck.name %></h3>
 
 <p>Deck Color(s): <%= @deck.color %></p>
 
 <p>Deck Size: <%= @deck.size %> cards </p>
+
+<h3>Cards in Deck</h3>
+
+<% if @deck.cards.count == 0 %>
+
+<%= "Please add cards to this deck." %>
+
+<% else %>
+
+  <% @deck.cards.each_with_index do |card, i| %>
+
+  <p><%= i + 1 %>. <%= card.name %></p>
+
+  <% end %>
+
+<% end %>
+
+<p></p>
 
 <a href="/decks/<%= @deck.id %>/edit"><button type="button" name="button">Edit Deck</button></a>
 <p></p>
