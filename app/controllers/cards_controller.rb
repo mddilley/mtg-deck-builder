@@ -29,10 +29,10 @@ class CardsController < ApplicationController
   #   erb :"/decks/edit"
   # end
   #
-  # get '/decks/:id' do
-  #   @deck = Deck.find(params[:id])
-  #   erb :"/decks/show"
-  # end
+  get '/cards/:id' do
+    @card = Card.find(params[:id])
+    erb :"/cards/show"
+  end
   #
   # patch '/decks/:id' do
   #   deck = Deck.find(params[:id])
