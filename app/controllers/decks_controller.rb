@@ -59,7 +59,12 @@ class DecksController < ApplicationController
         deck.update("size" => params["deck"][:size])
       end
       if params["card"][:name] != ""
-        card = Card.create("name" => params["card"][:name])
+        url = "https://api.scryfall.com/cards/named?fuzzy=#{card_name_to_search_name(params["card"]["name"])}"
+        uri = URI(url)
+        response = Net::HTTP.get(uri)
+        c = JSON.parse(response)
+        card = Card.create("name" => c["name"])
+        # card.
         # https://api.scryfall.com/cards/named?fuzzy=swords+to+plowshares
         deck.cards << card
       end

@@ -34,6 +34,10 @@ class ApplicationController < Sinatra::Base
       User.find(session[:id])
     end
 
+    def card_name_to_search_name(name)
+      name.downcase.split.join("+")
+    end
+
   end
 
 end
