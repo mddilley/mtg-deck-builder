@@ -64,8 +64,15 @@ class DecksController < ApplicationController
         response = Net::HTTP.get(uri)
         c = JSON.parse(response)
         card = Card.create("name" => c["name"])
-        # card.
-        # https://api.scryfall.com/cards/named?fuzzy=swords+to+plowshares
+        card.mana_cost = c["mana_cost"]
+        card.type = c["type_line"]
+        card.card_text = c["oracle_text"]
+        # card.color = c["colors"]
+        card.expansion = c["set_name"]
+        card.rarity = c["rarity"]
+        # card.flavor_text = c["flavor_text"]
+        # card.img_url = c["image_uris"]["normal"]
+        (c["power"] && c["toughness"]) ? card.power_toughness = "#{c["power"]} / #{c["toughness"]}" : card.power_toughness = "n/a"
         deck.cards << card
       end
       redirect to "/decks"
