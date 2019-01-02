@@ -51,6 +51,7 @@ class DecksController < ApplicationController
     deck = Deck.find(params[:id])
     if is_loggedin? && (deck.user_id == current_user.id)
       deck.delete
+      redirect to "/decks"
     else
       redirect to "/users/login"
     end
