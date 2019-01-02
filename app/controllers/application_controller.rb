@@ -9,7 +9,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    if is_loggedin?
+      redirect to "/decks"
+    else
+      erb :index
+    end
   end
 
   helpers do
