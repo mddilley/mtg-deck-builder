@@ -13,16 +13,16 @@ class CardsController < ApplicationController
     erb :"/cards/index"
   end
 
-  # post '/decks' do
-  #   if is_loggedin?
-  #     @deck = Deck.create(params)
-  #     @user = current_user
-  #     @user.decks << @deck
-  #     erb :"/decks/show"
-  #   else
-  #     redirect to "/users/login"
-  #   end
-  # end
+  post '/cards' do
+    if is_loggedin?
+      @card = Card.create(params)
+      @deck = current_user
+      @user.cards << @deck
+      erb :"/cards/show"
+    else
+      redirect to "/users/login"
+    end
+  end
   #
   # get '/decks/:id/edit' do
   #   @deck = Deck.find(params[:id])

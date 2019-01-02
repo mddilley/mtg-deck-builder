@@ -37,14 +37,18 @@ class DecksController < ApplicationController
   patch '/decks/:id' do
     deck = Deck.find(params[:id])
     if is_loggedin? && (deck.user_id == current_user.id)
-      if params[:name].strip != ""
-        deck.update("name" => params[:name])
+      if params["deck"][:name].strip != ""
+        deck.update("name" => params["deck"][:name])
       end
-      if params[:color].strip != ""
-        deck.update("color" => params[:color])
+      if params["deck"][:color].strip != ""
+        deck.update("color" => params["deck"][:color])
       end
-      if params[:size].strip != ""
-        deck.update("size" => params[:size])
+      if params["deck"][:size].strip != ""
+        deck.update("size" => params["deck"][:size])
+      end
+      if params["card"][:name] != ""
+        card = Card.create("name" => params["card"][:name])
+        deck.cards << card
       end
       redirect to "/decks"
     else

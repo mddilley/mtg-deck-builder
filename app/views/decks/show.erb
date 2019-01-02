@@ -8,13 +8,13 @@
 
 <% if @deck.cards.count == 0 %>
 
-<%= "Please add cards to this deck." %>
+<p><%= "Please select 'Edit Deck' to add cards to this deck." %></p>
 
 <% else %>
 
   <% @deck.cards.each_with_index do |card, i| %>
 
-  <p><%= i + 1 %>. <%= card.name %></p>
+  <p><%= i + 1 %>. <a href="/cards/<%= card.id %>"><%= card.name %></a></p>
 
   <% end %>
 

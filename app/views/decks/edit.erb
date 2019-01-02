@@ -3,28 +3,51 @@
   <input type="hidden" id="hidden" name="_method" value="patch">
 
   <p>
-    Deck Name: <%= @deck.name %>
+    <h3>Deck Name: <%= @deck.name %></h3>
   </p>
   <p>
     <label for="name">Edit Deck Name: </label>
-    <input type="text" id="name" name="name">
+    <input type="text" id="name" name="deck[name]">
   </p>
 
   <!-- Add button inputs collected in array, .join to convert to string -->
   <p>
-    Deck Color(s): <%= @deck.color %>
+    <strong>Deck Color(s): <%= @deck.color %></strong>
   </p>
   <p>
     <label for="color">Edit Deck Color(s): </label>
-    <input type="text" id="color" name="color">
+    <input type="text" id="color" name="deck[color]">
   </p>
 
   <p>
-    Deck Size: <%= @deck.size %>
+    <strong>Deck Size: <%= @deck.size %></strong>
   </p>
   <p>
-    <label for="size">Deck Size: </label>
-    <input type="text" id="size" name="size">
+    <label for="size">Edit Deck Size: </label>
+    <input type="text" id="size" name="deck[size]">
+  </p>
+
+  <h3>Cards in Deck</h3>
+
+<% if @deck.cards.count == 0 %>
+
+<p>There are no cards in this deck.</p>
+
+<% else %>
+
+    <% @deck.cards.each_with_index do |card, i| %>
+
+    <p><%= i + 1 %>. <a href="/cards/<%= card.id %>"><%= card.name %></a></p>
+
+    <% end %>
+
+<% end %>
+
+<p>To add a card, enter card name as shown on card:</p>
+
+  <p>
+    <label for="cardname">Add card: </label>
+    <input type="text" id="cardname" name="card[name]">
   </p>
 
   <input type="submit" value="Edit Deck">
