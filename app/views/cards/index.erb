@@ -1,7 +1,8 @@
 <h1>Your card collection</h1>
 
-<% @user.cards.each_with_index do |card, i| %>
+<% @user.cards.uniq.each_with_index do |card, i| %>
 
-<%= @user.card.name %>
+
+<p><%= i + 1 %>. <a href="/cards/<%=card.id%>"><%= card.name %></a></p>
 
 <% end %>
