@@ -9,8 +9,12 @@ class DecksController < ApplicationController
   end
 
   get '/decks' do
-    @user = current_user
-    erb :"/decks/index"
+    if is_loggedin?
+      @user = current_user
+      erb :"/decks/index"
+    else
+      redirect to "/users/login"
+    end
   end
 
   post '/decks' do
@@ -25,13 +29,21 @@ class DecksController < ApplicationController
   end
 
   get '/decks/:id/edit' do
-    @deck = Deck.find(params[:id])
-    erb :"/decks/edit"
+    if is_loggedin?
+      @deck = Deck.find(params[:id])
+      erb :"/decks/edit"
+    else
+      redirect to "/users/login"
+    end
   end
 
   get '/decks/:id' do
-    @deck = Deck.find(params[:id])
-    erb :"/decks/show"
+    if is_loggedin?
+      @deck = Deck.find(params[:id])
+      erb :"/decks/show"
+    else
+      redirect to "/users/login"
+    end
   end
 
   patch '/decks/:id' do
@@ -48,6 +60,7 @@ class DecksController < ApplicationController
       end
       if params["card"][:name] != ""
         card = Card.create("name" => params["card"][:name])
+        # https://api.scryfall.com/cards/named?fuzzy=swords+to+plowshares
         deck.cards << card
       end
       redirect to "/decks"

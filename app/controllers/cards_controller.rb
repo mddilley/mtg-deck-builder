@@ -9,8 +9,12 @@ class CardsController < ApplicationController
   end
 
   get '/cards' do
-    @user = current_user
-    erb :"/cards/index"
+    if is_loggedin?
+      @user = current_user
+      erb :"/cards/index"
+    else
+      redirect to "/users/login"
+    end
   end
 
   # post '/cards' do
@@ -30,8 +34,12 @@ class CardsController < ApplicationController
   # end
   #
   get '/cards/:id' do
-    @card = Card.find(params[:id])
-    erb :"/cards/show"
+    if is_loggedin?
+      @card = Card.find(params[:id])
+      erb :"/cards/show"
+    else
+      redirect to "/users/login"
+    end
   end
   #
   # patch '/decks/:id' do
