@@ -67,12 +67,14 @@ class DecksController < ApplicationController
         card.mana_cost = c["mana_cost"]
         card.type = c["type_line"]
         card.card_text = c["oracle_text"]
-        # card.color = c["colors"]
+        card.colors = c["colors"]
         card.expansion = c["set_name"]
         card.rarity = c["rarity"]
-        # card.flavor_text = c["flavor_text"]
-        # card.img_url = c["image_uris"]["normal"]
-        (c["power"] && c["toughness"]) ? card.power_toughness = "#{c["power"]} / #{c["toughness"]}" : card.power_toughness = "n/a"
+        c["flavor_text"] ? card.flavor_text = c["flavor_text"] : card.flavor_text = "n/a"
+        card.img_url = c["image_uris"]["normal"]
+        c["power"] ? card.power = c["power"] : card.power = "n/a"
+        c["toughness"] ? card.toughness = c["toughness"] : card.toughness = "n/a"
+        binding.pry
         deck.cards << card
       end
       redirect to "/decks"

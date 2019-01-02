@@ -21,10 +21,14 @@ ActiveRecord::Schema.define(version: 2018_12_29_164446) do
     t.string "name"
     t.string "mana_cost"
     t.string "type"
-    t.string "power_toughness"
+    t.string "power"
+    t.string "toughness"
     t.string "rarity"
     t.string "expansion"
     t.string "card_text"
+    t.string "colors"
+    t.string "flavor_text"
+    t.string "img_url"
   end
 
   create_table "decks", force: :cascade do |t|
