@@ -65,7 +65,7 @@ class DecksController < ApplicationController
         c = JSON.parse(response)
         card = Card.create("name" => c["name"])
         card.mana_cost = c["mana_cost"]
-        card.type = c["type_line"]
+        card.card_type = c["type_line"]
         card.card_text = c["oracle_text"]
         card.colors = c["colors"]
         card.expansion = c["set_name"]
