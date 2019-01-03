@@ -42,7 +42,11 @@ class ApplicationController < Sinatra::Base
       url = "https://api.scryfall.com/cards/named?fuzzy=#{card_name_to_search_name(card_name)}"
       uri = URI(url)
       response = Net::HTTP.get(uri)
-      c = JSON.parse(response)
+      card = JSON.parse(response)
+      add_card_attr(card)
+    end
+
+    def add_card_attr(c)
       Card.find_or_create_by("name" => c["name"]).tap { |card|
         card.mana_cost = c["mana_cost"]
         card.card_type = c["type_line"]
