@@ -59,7 +59,7 @@ class DecksController < ApplicationController
         deck.update("size" => params["deck"][:size])
       end
       if params["card"][:name] != ""
-        card = get_card_attr(params["card"]["name"])
+        card = create_card(params["card"]["name"])
         deck.cards << card
       end
       redirect to "/decks"

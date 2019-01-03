@@ -38,23 +38,23 @@ class ApplicationController < Sinatra::Base
       name.downcase.split.join("+")
     end
 
-    def get_card_attr(card_name)
+    def create_card(card_name)
       url = "https://api.scryfall.com/cards/named?fuzzy=#{card_name_to_search_name(card_name)}"
       uri = URI(url)
       response = Net::HTTP.get(uri)
       c = JSON.parse(response)
-      card = Card.create("name" => c["name"])
-      card.mana_cost = c["mana_cost"]
-      card.card_type = c["type_line"]
-      card.card_text = c["oracle_text"]
-      card.colors = c["colors"]
-      card.expansion = c["set_name"]
-      card.rarity = c["rarity"]
-      c["flavor_text"] ? card.flavor_text = c["flavor_text"] : card.flavor_text = "n/a"
-      card.img_url = c["image_uris"]["normal"]
-      c["power"] ? card.power = c["power"] : card.power = "n/a"
-      c["toughness"] ? card.toughness = c["toughness"] : card.toughness = "n/a"
-      card
+      Card.create("name" => c["name"]).tap { |card|
+        card.mana_cost = c["mana_cost"]
+        card.card_type = c["type_line"]
+        card.card_text = c["oracle_text"]
+        card.colors = c["colors"]
+        card.expansion = c["set_name"]
+        card.rarity = c["rarity"]
+        c["flavor_text"] ? card.flavor_text = c["flavor_text"] : card.flavor_text = "n/a"
+        card.img_url = c["image_uris"]["border_crop"]
+        c["power"] ? card.power = c["power"] : card.power = "n/a"
+        c["toughness"] ? card.toughness = c["toughness"] : card.toughness = "n/a"
+      }
     end
 
   end
