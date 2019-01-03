@@ -60,7 +60,6 @@ class DecksController < ApplicationController
       end
       if params["card"][:name] != ""
         card = create_card(params["card"]["name"])
-        binding.pry
         deck.cards << card if deck.cards.select {|c| c.name == card.name}.size < 4
       end
       redirect to "/decks"
