@@ -52,7 +52,7 @@ class DecksController < ApplicationController
       if params["deck"][:name].strip != ""
         deck.update("name" => params["deck"][:name])
       end
-      if params["deck"][:color].strip != ""
+      if params["deck"][:color] != ""
         deck.update("color" => params["deck"][:color])
       end
       if params["deck"][:size].strip != ""

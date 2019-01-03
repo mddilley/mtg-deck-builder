@@ -61,6 +61,10 @@ class ApplicationController < Sinatra::Base
       }
     end
 
+    def checked(color)
+      "checked" if @deck.color.include?(color)
+    end
+
   end
 
 end

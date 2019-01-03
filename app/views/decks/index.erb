@@ -10,7 +10,7 @@
 
     <a href="/decks/<%= deck.id %>"><p>Deck Name: <%= deck.name %></p></a>
 
-    <p>Deck Color(s): <%= deck.color %></p>
+    <p>Deck Color(s): <%= eval(deck.color).join(" / ") %></p>
 
     <p>Deck Size: <%= deck.size %> cards </p>
 

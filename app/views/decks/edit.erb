@@ -12,11 +12,20 @@
 
   <!-- Add button inputs collected in array, .join to convert to string -->
   <p>
-    <strong>Deck Color(s): <%= @deck.color %></strong>
+    <strong>Deck Color(s): <%= eval(@deck.color).join(" / ") %></strong>
   </p>
   <p>
-    <label for="color">Edit Deck Color(s): </label>
-    <input type="text" id="color" name="deck[color]">
+    <label for="color">Deck Color(s): </label>
+    <input type="checkbox" name="deck[color][]" value="White" id="White" <%= checked("White") %>>
+    <label for="White">White</label>
+    <input type="checkbox" name="deck[color][]" value="Black" id="Black" <%= checked("Black") %>>
+    <label for="Black">Black</label>
+    <input type="checkbox" name="deck[color][]" value="Green" id="Green" <%= checked("Green") %>>
+    <label for="Green">Green</label>
+    <input type="checkbox" name="deck[color][]" value="Red" id="Red" <%= checked("Red") %>>
+    <label for="Red">Red</label>
+    <input type="checkbox" name="deck[color][]" value="Blue" id="Blue" <%= checked("Blue") %>>
+    <label for="Blue">Blue</label>
   </p>
 
   <p>
