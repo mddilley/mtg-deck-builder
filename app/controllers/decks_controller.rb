@@ -38,11 +38,11 @@ class DecksController < ApplicationController
   end
 
   get '/decks/:id' do
-    if is_loggedin?
-      @deck = Deck.find(params[:id])
+    @deck = Deck.find(params[:id])
+    if is_loggedin? && (@deck.user_id == current_user.id)
       erb :"/decks/show"
     else
-      redirect to "/users/login"
+      redirect to "/decks"
     end
   end
 
