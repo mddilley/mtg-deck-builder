@@ -29,8 +29,8 @@ class DecksController < ApplicationController
   end
 
   get '/decks/:id/edit' do
-    if is_loggedin?
-      @deck = Deck.find(params[:id])
+    @deck = Deck.find(params[:id])
+    if is_loggedin? && (@deck.user_id == current_user.id)
       erb :"/decks/edit"
     else
       redirect to "/users/login"
@@ -60,7 +60,8 @@ class DecksController < ApplicationController
       end
       if params["card"][:name] != ""
         card = create_card(params["card"]["name"])
-        deck.cards << card
+        binding.pry
+        deck.cards << card if deck.cards.select {|c| c.name == card.name}.size < 4
       end
       redirect to "/decks"
     else

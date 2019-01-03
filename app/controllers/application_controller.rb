@@ -43,7 +43,7 @@ class ApplicationController < Sinatra::Base
       uri = URI(url)
       response = Net::HTTP.get(uri)
       c = JSON.parse(response)
-      Card.create("name" => c["name"]).tap { |card|
+      Card.find_or_create_by("name" => c["name"]).tap { |card|
         card.mana_cost = c["mana_cost"]
         card.card_type = c["type_line"]
         card.card_text = c["oracle_text"]
