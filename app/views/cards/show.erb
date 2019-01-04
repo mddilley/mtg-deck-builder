@@ -1,22 +1,30 @@
 <img src="<%= @card.img_url %>" alt="<%= @card.name %>">
 
-<h3>Card Name: <%= @card.name %></h3>
+<h3>Name: <%= @card.name %></h3>
 
-<p>Card Type: <%= @card.card_type %></p>
+<p>Type: <%= @card.card_type %></p>
 
-<p>Card Colors: <%= mana_colors_to_img(@card.colors) %></p>
+<p>Colors: <%= mana_colors_to_img(@card.colors) %></p>
 
-<p>Card Expansion: <%= @card.expansion %></p>
+<p>Expansion: <%= @card.expansion %></p>
 
-<p>Card Rarity: <%= @card.rarity %></p>
+<p>Rarity: <%= @card.rarity %></p>
 
-<p>Card Mana Cost: <%= mana_colors_to_img(@card.mana_cost) %></p>
+<p>Mana Cost: <%= mana_colors_to_img(@card.mana_cost) %></p>
 
-<p>Card Power/Toughness: <%= "#{@card.power} / #{@card.toughness}" %></p>
+<% if @card.power || @card.toughness %>
 
-<p>Card Text: <%= mana_colors_to_img(@card.card_text) %></p>
+  <p>Power/Toughness: <%= "#{@card.power} / #{@card.toughness}" %></p>
 
-<p>Card Flavor Text: <%= @card.flavor_text %></p>
+<% end %>
+
+<p>Text: <%= mana_colors_to_img(@card.card_text) %></p>
+
+<% if @card.flavor_text %>
+
+  <p>Flavor Text: <%= @card.flavor_text %></p>
+
+<% end %>
 
 <form action="/cards/<%= @card.id %>" method="post">
 
