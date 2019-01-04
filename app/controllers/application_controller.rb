@@ -36,6 +36,10 @@ class ApplicationController < Sinatra::Base
       User.find(session[:id])
     end
 
+    def is_object?(object)
+      !!object.id rescue false
+    end
+
     # Card helper methods
 
     def card_name_to_search_name(name)
@@ -71,7 +75,12 @@ class ApplicationController < Sinatra::Base
     end
 
     def convert_colors(c)
-      colors = eval(c.colors).map do |c|
+      if is_object?(c)
+        colors = eval(c.colors)
+      elsif c.is_a?(Array)
+        colors = c
+      end
+      colors.map do |c|
         c == "G" ? c = "Green" : c
         c == "W" ? c = "White" : c
         c == "B" ? c = "Black" : c
@@ -81,9 +90,21 @@ class ApplicationController < Sinatra::Base
       colors.join(" / ")
     end
 
+    def string_to_img_tag(string)
+      <<-HTML
+        <img height="20" width="20" src="/images/#{string}.png" alt="#{string} mana symbol">
+      HTML
+    end
+
     def mana_colors_to_img(string)
-      string.gsub(/\W/, "")
-      # binding.pry
+      mana_array = string.gsub(/\W/, "").split("")
+      mana_array.map do |i|
+        if i.to_i > 0
+          (0..i.to_i - 1).collect { string_to_img_tag("C") }
+        else
+          string_to_img_tag(i)
+        end
+      end.join
     end
 
     # Deck helper methods
