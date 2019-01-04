@@ -61,17 +61,14 @@ class CardsController < ApplicationController
   # end
   #
   delete '/cards/:id/:deck_id' do
-    binding.pry
     carddeck = CardDeck.find_by("card_id" => params[:id], "deck_id" => params[:deck_id])
-    carddeck.delete
-
-    # card = Card.find_by(params[:id])
-    # if is_loggedin? && (deck.user_id == current_user.id)
-    #   card.delete
-    #   redirect to "/decks"
-    # else
-    #   redirect to "/users/login"
-    # end
+    deck = Deck.find(params[:deck_id])
+    if is_loggedin? && (deck.user_id == current_user.id)
+      carddeck.delete
+      redirect to "/decks"
+    else
+      redirect to "/users/login"
+    end
   end
 
 end
