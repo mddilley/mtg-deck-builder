@@ -62,7 +62,7 @@ class ApplicationController < Sinatra::Base
         card.card_text = c["oracle_text"]
         card.colors = c["colors"]
         card.expansion = c["set_name"]
-        card.rarity = c["rarity"]
+        card.rarity = c["rarity"].capitalize
         c["flavor_text"] ? card.flavor_text = c["flavor_text"] : card.flavor_text = "n/a"
         card.img_url = c["image_uris"]["border_crop"]
         c["power"] ? card.power = c["power"] : card.power = "n/a"
@@ -79,6 +79,11 @@ class ApplicationController < Sinatra::Base
         c == "U" ? c = "Blue" : c
       end
       colors.join(" / ")
+    end
+
+    def mana_colors_to_img(string)
+      string.gsub(/\W/, "")
+      # binding.pry
     end
 
     # Deck helper methods

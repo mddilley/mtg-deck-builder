@@ -10,7 +10,7 @@
 
 <p>Card Rarity: <%= @card.rarity %></p>
 
-<p>Card Mana Cost: <%= @card.mana_cost %></p>
+<p>Card Mana Cost: <%= mana_colors_to_img(@card.mana_cost) %><img src="/public/images/B.svg" alt="Black mana symbol"></p>
 
 <p>Card Power/Toughness: <%= "#{@card.power} / #{@card.toughness}" %></p>
 
