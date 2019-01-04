@@ -43,7 +43,6 @@ class ApplicationController < Sinatra::Base
     end
 
     def create_card(card_name)
-      # binding.pry
       url = "https://api.scryfall.com/cards/named?fuzzy=#{card_name_to_search_name(card_name)}"
       uri = URI(url)
       response = Net::HTTP.get(uri)
@@ -69,6 +68,17 @@ class ApplicationController < Sinatra::Base
         c["power"] ? card.power = c["power"] : card.power = "n/a"
         c["toughness"] ? card.toughness = c["toughness"] : card.toughness = "n/a"
       }
+    end
+
+    def convert_colors(c)
+      colors = eval(c.colors).map do |c|
+        c == "G" ? c = "Green" : c
+        c == "W" ? c = "White" : c
+        c == "B" ? c = "Black" : c
+        c == "R" ? c = "Red" : c
+        c == "U" ? c = "Blue" : c
+      end
+      colors.join(" / ")
     end
 
     # Deck helper methods

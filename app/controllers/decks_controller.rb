@@ -61,6 +61,9 @@ class DecksController < ApplicationController
       if params["card"][:name] != ""
         card = create_card(params["card"]["name"])
         deck.cards << card if card != nil && card_repl_limit(deck, card) && deck_is_full?(deck)
+      elsif params["card"][:id] != ""
+        card = Card.find(params["card"][:id])
+        deck.cards << card if card != nil && card_repl_limit(deck, card) && deck_is_full?(deck)
       end
       redirect to "/decks"
     else
