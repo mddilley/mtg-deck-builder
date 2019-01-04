@@ -1,3 +1,26 @@
 <img src="<%= @card.img_url %>" alt="<%= @card.name %>">
 
 <h3>Card Name: <%= @card.name %></h3>
+
+<p>Card Type: <%= @card.card_type %></p>
+
+<p>Card Colors: <%= convert_colors(@card) %></p>
+
+<p>Card Expansion: <%= @card.expansion %></p>
+
+<p>Card Rarity: <%= @card.rarity %></p>
+
+<p>Card Mana Cost: <%= @card.mana_cost %></p>
+
+<p>Card Power/Toughness: <%= "#{@card.power} / #{@card.toughness}" %></p>
+
+<p>Card Text: <%= @card.card_text %></p>
+
+<p>Card Flavor Text: <%= @card.flavor_text %></p>
+
+<form action="/cards/<%= @card.id %>" method="post">
+
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Card"> <strong>Deleting card will remove it from all decks.</strong>
+
+</form>
