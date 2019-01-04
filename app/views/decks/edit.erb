@@ -10,7 +10,6 @@
     <input type="text" id="name" name="deck[name]">
   </p>
 
-  <!-- Add button inputs collected in array, .join to convert to string -->
   <p>
     <strong>Deck Color(s): <%= eval(@deck.color).join(" / ") %></strong>
   </p>
@@ -36,21 +35,7 @@
     <input type="text" id="size" name="deck[size]">
   </p>
 
-  <h3>Cards in Deck</h3>
 
-<% if @deck.cards.count == 0 %>
-
-<p>There are no cards in this deck.</p>
-
-<% else %>
-
-    <% @deck.cards.uniq.each_with_index do |card, i| %>
-
-    <p><%= i + 1 %>. <a href="/cards/<%= card.id %>"><%= card.name %></a>  x <%= @deck.cards.select {|c| c.name == card.name}.size %></p>
-
-    <% end %>
-
-<% end %>
 
 <p>To add a card, enter card name as shown on card:</p>
 
@@ -62,3 +47,26 @@
   <input type="submit" value="Edit Deck">
 
 </form>
+
+<h3>Cards in Deck</h3>
+
+<% if @deck.cards.count == 0 %>
+
+<p>There are no cards in this deck.</p>
+
+<% else %>
+
+  <% @deck.cards.uniq.each_with_index do |card, i| %>
+
+  <p><%= i + 1 %>. <a href="/cards/<%= card.id %>"><%= card.name %></a>  x <%= @deck.cards.select {|c| c.name == card.name}.size %></p>
+
+  <form action="/cards/<%=card.id%>/<%=@deck.id%>" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Card" id="Delete Card">
+  </form>
+
+
+
+  <% end %>
+
+<% end %>
