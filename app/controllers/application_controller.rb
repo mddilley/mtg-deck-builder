@@ -97,14 +97,10 @@ class ApplicationController < Sinatra::Base
     end
 
     def mana_colors_to_img(string)
-      mana_array = string.gsub(/\W/, "").split("")
-      mana_array.map do |i|
-        if i.to_i > 0
-          (0..i.to_i - 1).collect { string_to_img_tag("C") }
-        else
-          string_to_img_tag(i)
-        end
-      end.join
+      string.gsub(/[{].[}]/) do |s|
+        i = s.gsub(/[{}]/,"").to_i
+        i > 0 ? (0..i.to_i - 1).collect { string_to_img_tag("C") }.join : string_to_img_tag(s.gsub(/[{}]/,""))
+      end
     end
 
     # Deck helper methods
