@@ -50,7 +50,7 @@
 
     <option value=""></option>
 
-    <% Card.all.order(:name).uniq.each do |card| %>
+    <% current_user.cards.order(:name).uniq.each do |card| %>
 
       <option value="<%= card.id %>"><%= card.name %> (<%= "#{convert_colors(card)}" %>)</option>
 
