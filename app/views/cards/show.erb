@@ -4,7 +4,7 @@
 
 <p>Card Type: <%= @card.card_type %></p>
 
-<p>Card Colors: <%= convert_colors(@card) %></p>
+<p>Card Colors: <%= mana_colors_to_img(@card.colors) %></p>
 
 <p>Card Expansion: <%= @card.expansion %></p>
 
@@ -14,7 +14,7 @@
 
 <p>Card Power/Toughness: <%= "#{@card.power} / #{@card.toughness}" %></p>
 
-<p>Card Text: <%= @card.card_text %></p>
+<p>Card Text: <%= mana_colors_to_img(@card.card_text) %></p>
 
 <p>Card Flavor Text: <%= @card.flavor_text %></p>
 

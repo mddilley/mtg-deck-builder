@@ -92,11 +92,14 @@ class ApplicationController < Sinatra::Base
 
     def string_to_img_tag(string)
       <<-HTML
-        <img height="20" width="20" src="/images/#{string}.png" alt="#{string} mana symbol">
+        <img height="15" width="15" src="/images/#{string}.png" alt="#{string} mana symbol">
       HTML
     end
 
     def mana_colors_to_img(string)
+      if string[0] == "["
+        string = eval(string).join("}{").prepend("{") << "}"
+      end
       string.gsub(/[{].[}]/) do |s|
         i = s.gsub(/[{}]/,"").to_i
         i > 0 ? (0..i.to_i - 1).collect { string_to_img_tag("C") }.join : string_to_img_tag(s.gsub(/[{}]/,""))
