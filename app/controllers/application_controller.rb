@@ -64,7 +64,7 @@ class ApplicationController < Sinatra::Base
         card.mana_cost = c["mana_cost"]
         card.card_type = c["type_line"]
         card.card_text = c["oracle_text"]
-        c["colors"] != [] ? card.colors = c["colors"] : card.colors = "{C}"
+        c["colors"] != [] ? card.colors = c["colors"] : card.colors = "[\"C\"]"
         card.expansion = c["set_name"]
         card.rarity = c["rarity"].capitalize
         card.flavor_text = c["flavor_text"]
@@ -74,21 +74,21 @@ class ApplicationController < Sinatra::Base
       }
     end
 
-    def convert_colors(c)
-      if is_object?(c)
-        colors = eval(c.colors)
-      elsif c.is_a?(Array)
-        colors = c
-      end
-      colors.map do |c|
-        c == "G" ? c = "Green" : c
-        c == "W" ? c = "White" : c
-        c == "B" ? c = "Black" : c
-        c == "R" ? c = "Red" : c
-        c == "U" ? c = "Blue" : c
-      end
-      colors.join(" / ")
-    end
+    # def convert_colors(c)
+    #   if is_object?(c)
+    #     colors = eval(c.colors)
+    #   elsif c.is_a?(Array)
+    #     colors = c
+    #   end
+    #   colors.map do |c|
+    #     c == "G" ? c = "Green" : c
+    #     c == "W" ? c = "White" : c
+    #     c == "B" ? c = "Black" : c
+    #     c == "R" ? c = "Red" : c
+    #     c == "U" ? c = "Blue" : c
+    #   end
+    #   colors.join(" / ")
+    # end
 
     def string_to_img_tag(string)
       <<-HTML
