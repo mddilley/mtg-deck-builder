@@ -1,34 +1,44 @@
-<img class="img-fluid" src="<%= @card.img_url %>" alt="<%= @card.name %>">
+<div class="container">
 
-<h3>Name: <%= @card.name %></h3>
+  <div class="row">
+      <div class="col-lg">
+        <img class="img-fluid" src="<%= @card.img_url %>" alt="<%= @card.name %>">
+      </div>
 
-<p>Type: <%= @card.card_type %></p>
+      <div class="col-lg">
+        <h3>Name: <%= @card.name %></h3>
 
-<p>Colors: <%= mana_colors_to_img(@card.colors) %></p>
+        <p>Type: <%= @card.card_type %></p>
 
-<p>Expansion: <%= @card.expansion %></p>
+        <p>Colors: <%= mana_colors_to_img(@card.colors) %></p>
 
-<p>Rarity: <%= @card.rarity %></p>
+        <p>Expansion: <%= @card.expansion %></p>
 
-<p>Mana Cost: <%= mana_colors_to_img(@card.mana_cost) %></p>
+        <p>Rarity: <%= @card.rarity %></p>
 
-<% if @card.power || @card.toughness %>
+        <p>Mana Cost: <%= mana_colors_to_img(@card.mana_cost) %></p>
 
-  <p>Power/Toughness: <%= "#{@card.power} / #{@card.toughness}" %></p>
+        <% if @card.power || @card.toughness %>
 
-<% end %>
+          <p>Power/Toughness: <%= "#{@card.power} / #{@card.toughness}" %></p>
 
-<p>Text: <%= mana_colors_to_img(@card.card_text) %></p>
+        <% end %>
 
-<% if @card.flavor_text %>
+        <p>Text: <%= mana_colors_to_img(@card.card_text) %></p>
 
-  <p>Flavor Text: <%= @card.flavor_text %></p>
+        <% if @card.flavor_text %>
 
-<% end %>
+          <p>Flavor Text: <%= @card.flavor_text %></p>
 
-<form action="/cards/<%= @card.id %>" method="post">
+        <% end %>
 
-  <input type="hidden" id="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Card"> <strong>Deleting card will remove it from all decks.</strong>
+        <form action="/cards/<%= @card.id %>" method="post">
 
-</form>
+          <input type="hidden" id="hidden" name="_method" value="delete">
+          <input type="submit" value="Delete Card"> <strong>Deleting card will remove it from all decks.</strong>
+
+        </form>
+      </div>
+  </div>
+
+</div>
