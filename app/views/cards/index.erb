@@ -8,11 +8,11 @@
 
   <% @user.cards.uniq.each_with_index do |card, i| %>
 
-    <p>
+    <div>
 
       <%= i + 1 %>. <a href="/cards/<%= card.id %>"><%= card.name %></a>  x <%= @user.cards.select {|c| c.name == card.name}.size %>
 
-    </p>
+    </div>
 
   <% end %>
 
