@@ -52,7 +52,7 @@
 
     <% current_user.cards.order(:name).uniq.each do |card| %>
 
-      <option value="<%= card.id %>"><%= card.name %> (<%= "#{convert_colors(card)}" %>)</option>
+      <option value="<%= card.id %>" ><%= card.name %> (<%= "#{convert_colors(card)}" %>)</option>
 
     <% end %>
 

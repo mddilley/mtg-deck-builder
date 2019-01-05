@@ -65,7 +65,7 @@ class DecksController < ApplicationController
         card = Card.find(params["card"][:id])
         deck.cards << card if card != nil && card_repl_limit(deck, card) && deck_is_full?(deck)
       end
-      redirect to "/decks"
+      redirect to "/decks/#{params[:id]}"
     else
       redirect to "/users/login"
     end
