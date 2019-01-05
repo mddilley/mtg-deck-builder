@@ -2,18 +2,42 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
     <title>Magic the Gathering Deck Builder</title>
   </head>
   <body>
+    <div class="jumbotron">
+      <h1 class="display-4">Magic the Gathering Deck Builder</h1>
+      <p class="lead">Use this tool to create and track MTG decks and to catalog all of the cards in your collection.</p>
+      <hr class="my-4">
+      <p>Welcome, <%= current_user.username %></p>
+      <a class="btn btn-primary btn-sm" href="#" role="button">Learn more</a>
+    </div>
 
-    <%= yield %>
+    <div class="container">
+
+      <%= yield %>
+
+    </div>
+
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
   </body>
   <footer>
+
+    <div class="container">
       <p>
         <a href="/decks"><%= "Your Decks" if is_loggedin? %></a>
         <a href="/cards"><%= "Your Cards" if is_loggedin? %></a>
         <%= "<a href=\"/users/logout\"><button type=\"button\" name=\"button\">Logout</button></a>" if is_loggedin? %>
       </p>
+    </div>
+
   </footer>
 </html>
