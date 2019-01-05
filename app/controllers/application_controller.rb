@@ -64,14 +64,12 @@ class ApplicationController < Sinatra::Base
         card.mana_cost = c["mana_cost"]
         card.card_type = c["type_line"]
         card.card_text = c["oracle_text"]
-        # binding.pry
         c["colors"] != [] ? card.colors = c["colors"] : card.colors = "{C}"
         card.expansion = c["set_name"]
         card.rarity = c["rarity"].capitalize
         card.flavor_text = c["flavor_text"]
         card.img_url = c["image_uris"]["border_crop"]
         card.power = c["power"]
-        # c["power"] ? card.power = c["power"] : card.power = " "
         card.toughness = c["toughness"]
       }
     end
