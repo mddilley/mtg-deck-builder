@@ -29,7 +29,7 @@
         if is_loggedin?
           <<-HTML
           Welcome, #{current_user.username}.
-          <a class="btn btn-primary btn-sm" href="/users/logout" role="button">Logout</a>
+          <a class="btn btn-danger btn-sm" href="/users/logout" role="button">Logout</a>
           HTML
         else
           <<-HTML
