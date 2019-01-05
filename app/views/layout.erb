@@ -11,12 +11,41 @@
     <title>Magic the Gathering Deck Builder</title>
   </head>
   <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="/decks"><%= "Your Decks" if is_loggedin? %><span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="/cards"><%= "Your Cards" if is_loggedin? %></a>
+          <a class="nav-item nav-link" href="#">Pricing</a>
+        </div>
+      </div>
+
+      <div>
+        <%=
+        if is_loggedin?
+          <<-HTML
+          Welcome, #{current_user.username}.
+          <a class="btn btn-primary btn-sm" href="/users/logout" role="button">Logout</a>
+          HTML
+        else
+          <<-HTML
+            <a class="btn btn-primary btn-sm" href="/users/signup" role="button">Signup</a>
+            or
+            <a class="btn btn-primary btn-sm" href="/users/login" role="button">Login</a>
+          HTML
+        end %>
+      </div>
+    </nav>
+
     <div class="jumbotron">
-      <h1 class="display-4">Magic the Gathering Deck Builder</h1>
+      <h2 class="display-4">Magic the Gathering Deck Builder</h2>
       <p class="lead">Use this tool to create and track MTG decks and to catalog all of the cards in your collection.</p>
-      <hr class="my-4">
-      <p>Welcome, <%= current_user.username %></p>
-      <a class="btn btn-primary btn-sm" href="#" role="button">Learn more</a>
+      <!-- <hr class="my-4"> -->
     </div>
 
     <div class="container">
@@ -30,14 +59,6 @@
 
   </body>
   <footer>
-
-    <div class="container">
-      <p>
-        <a href="/decks"><%= "Your Decks" if is_loggedin? %></a>
-        <a href="/cards"><%= "Your Cards" if is_loggedin? %></a>
-        <%= "<a href=\"/users/logout\"><button type=\"button\" name=\"button\">Logout</button></a>" if is_loggedin? %>
-      </p>
-    </div>
 
   </footer>
 </html>
