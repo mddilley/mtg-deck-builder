@@ -5,6 +5,8 @@
 
 <div class="container">
 
+<% if @user.decks != [] %>
+
 <% @user.decks.each_with_index do |deck, i| %>
 
     <% if ((i % 3 == 0) || i == 0) %>
@@ -31,4 +33,9 @@
 
 <% end %>
 
+<% else %>
+
+  You have no decks in your collection.
+
+<% end %>
 </div>
