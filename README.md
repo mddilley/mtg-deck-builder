@@ -6,6 +6,7 @@ Use this application to plan and build Magic the Gathering decks in Standard for
 
 Clone this repository, and then execute:
 
+    $ cd mtg-deck-builder
     $ bundle
 
 In the terminal, run:
