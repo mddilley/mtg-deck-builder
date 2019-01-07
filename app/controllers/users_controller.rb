@@ -10,9 +10,13 @@ class UsersController < ApplicationController
 
   post '/users/signup' do
     if !is_loggedin? && !User.find_by("username" => params["username"])
-      @user = User.create(params)
-      login(@user.id)
-      erb :"/decks/index"
+      if params["username"] != "" && params["password"] != "" && params["email"] != ""
+        @user = User.create(params)
+        login(@user.id)
+        erb :"/decks/index"
+      else
+        redirect to "/"
+      end
     else
       redirect to "/"
     end
