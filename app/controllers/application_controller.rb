@@ -93,7 +93,8 @@ class ApplicationController < Sinatra::Base
     end
 
     def card_repl_limit(deck, card)
-      deck.cards.select {|c| c.name == card.name}.size < 4
+      exclude = ["Plains", "Swamp", "Island", "Swamp", "Mountain", "Forest"]
+      deck.cards.select {|c| c.name == card.name && !exclude.include?(card.name)}.size < 4
     end
 
     def deck_is_full?(deck)
