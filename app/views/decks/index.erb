@@ -17,7 +17,7 @@
 
       <a href="/decks/<%= deck.id %>"><h4><%= deck.name %></h4></a>
 
-      <p>Color(s): <%= eval(deck.color).join(" / ") %></p>
+      <p>Color(s): <%= mana_colors_to_img(deck.color) %></p>
 
       <p>Size: <%= deck.size %> cards </p>
 

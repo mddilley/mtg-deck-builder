@@ -11,19 +11,19 @@
   </p>
 
   <p>
-    <strong>Deck Color(s): <%= eval(@deck.color).join(" / ") %></strong>
+    <strong>Deck Color(s): <%= mana_colors_to_img(@deck.color) %></strong>
   </p>
   <p>
     <label for="color">Deck Color(s): </label>
-    <input type="checkbox" name="deck[color][]" value="White" id="White" <%= checked("White") %>>
+    <input type="checkbox" name="deck[color][]" value="W" id="White" <%= checked("White") %>>
     <label for="White">White</label>
-    <input type="checkbox" name="deck[color][]" value="Black" id="Black" <%= checked("Black") %>>
+    <input type="checkbox" name="deck[color][]" value="B" id="Black" <%= checked("Black") %>>
     <label for="Black">Black</label>
-    <input type="checkbox" name="deck[color][]" value="Green" id="Green" <%= checked("Green") %>>
+    <input type="checkbox" name="deck[color][]" value="G" id="Green" <%= checked("Green") %>>
     <label for="Green">Green</label>
-    <input type="checkbox" name="deck[color][]" value="Red" id="Red" <%= checked("Red") %>>
+    <input type="checkbox" name="deck[color][]" value="R" id="Red" <%= checked("Red") %>>
     <label for="Red">Red</label>
-    <input type="checkbox" name="deck[color][]" value="Blue" id="Blue" <%= checked("Blue") %>>
+    <input type="checkbox" name="deck[color][]" value="U" id="Blue" <%= checked("Blue") %>>
     <label for="Blue">Blue</label>
   </p>
 

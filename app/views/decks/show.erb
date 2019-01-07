@@ -1,6 +1,6 @@
 <h3>Deck Name: <%= @deck.name %></h3>
 
-<p>Deck Color(s): <%= eval(@deck.color).join(" / ") %></p>
+<p>Deck Color(s): <%= mana_colors_to_img(@deck.color) %></p>
 
 <p>Deck Size: <%= @deck.size %> cards (<%= @deck.size.to_i - @deck.cards.size %> cards remaining)</p>
 
