@@ -36,10 +36,6 @@ class ApplicationController < Sinatra::Base
       User.find(session[:id])
     end
 
-    def is_object?(object)
-      !!object.id rescue false
-    end
-
     # Card helper methods
 
     def card_name_to_search_name(name)
@@ -73,22 +69,6 @@ class ApplicationController < Sinatra::Base
         card.toughness = c["toughness"]
       }
     end
-
-    # def convert_colors(c)
-    #   if is_object?(c)
-    #     colors = eval(c.colors)
-    #   elsif c.is_a?(Array)
-    #     colors = c
-    #   end
-    #   colors.map do |c|
-    #     c == "G" ? c = "Green" : c
-    #     c == "W" ? c = "White" : c
-    #     c == "B" ? c = "Black" : c
-    #     c == "R" ? c = "Red" : c
-    #     c == "U" ? c = "Blue" : c
-    #   end
-    #   colors.join(" / ")
-    # end
 
     def string_to_img_tag(string)
       <<-HTML
