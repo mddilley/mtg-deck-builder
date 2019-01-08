@@ -10,7 +10,7 @@ Specs:
 - [x] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying: CRUD routes defined in DecksController
 - [x] Ensure that users can't modify content created by other users: All read, update, and destroy routes enforce user relationship to content
 - [x] Include user input validations: User password authenticated with Bcrypt, signup form fields validated in UsersController
-- [ ] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
+- [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new): Add flash messages for validation failures for signup, login, and addition of cards to deck (invalid card name, card replicate limit, and deck full)
 - [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
