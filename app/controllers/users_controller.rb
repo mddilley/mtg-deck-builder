@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if !is_loggedin?
       erb :"/users/signup"
     else
-      redirect to :"/decks"
+      redirect to "/decks"
     end
   end
 
@@ -15,7 +15,8 @@ class UsersController < ApplicationController
         login(@user.id)
         erb :"/decks/index"
       else
-        redirect to "/"
+        flash[:invalidsignup] = "Invalid input. Please fill each field and submit to sign up."
+        redirect to "/users/signup"
       end
     else
       redirect to "/"
@@ -36,7 +37,8 @@ class UsersController < ApplicationController
       login(@user.id)
       erb :"/decks/index"
     else
-      redirect to :"/users/login"
+      flash[:invalidpw] = "Invalid password. Please enter your password to login."
+      redirect to "/users/login"
     end
   end
 

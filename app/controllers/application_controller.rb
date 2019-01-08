@@ -6,6 +6,8 @@ class ApplicationController < Sinatra::Base
     use Rack::Session::Cookie, :key => 'rack.session',
                            :path => '/',
                            :secret => '35cbcfd4aa24ac8ed4cfc49f7baeb022'
+    # enable :sessions
+    register Sinatra::Flash
   end
 
   get '/' do
