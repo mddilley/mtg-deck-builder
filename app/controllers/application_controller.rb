@@ -79,9 +79,8 @@ class ApplicationController < Sinatra::Base
     end
 
     def mana_colors_to_img(string)
-      if string[0] == "["
-        string = eval(string).join("}{").prepend("{") << "}"
-      end
+      string = "none" if string == nil
+      string = eval(string).join("}{").prepend("{") << "}" if string[0] == "["
       string.gsub(/[{].[}]/) do |s|
         i = s.gsub(/[{}]/,"").to_i
         i > 0 ? (0..i.to_i - 1).collect { string_to_img_tag("C") }.join : string_to_img_tag(s.gsub(/[{}]/,""))
@@ -90,8 +89,8 @@ class ApplicationController < Sinatra::Base
 
     # Deck helper methods
 
-    def checked(color)
-      "checked" if @deck.color.include?(color)
+    def checked(deck, color)
+      "checked" if deck.color != nil && deck.color.include?(color)
     end
 
     def card_repl_limit(deck, card)

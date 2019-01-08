@@ -15,15 +15,15 @@
   </p>
   <p>
     <label for="color">Deck Color(s): </label>
-    <input type="checkbox" name="deck[color][]" value="W" id="White" <%= checked("W") %>>
+    <input type="checkbox" name="deck[color][]" value="W" id="White" <%= checked(@deck, "W") %>>
     <label for="White">White</label>
-    <input type="checkbox" name="deck[color][]" value="B" id="Black" <%= checked("B") %>>
+    <input type="checkbox" name="deck[color][]" value="B" id="Black" <%= checked(@deck, "B") %>>
     <label for="Black">Black</label>
-    <input type="checkbox" name="deck[color][]" value="G" id="Green" <%= checked("G") %>>
+    <input type="checkbox" name="deck[color][]" value="G" id="Green" <%= checked(@deck, "G") %>>
     <label for="Green">Green</label>
-    <input type="checkbox" name="deck[color][]" value="R" id="Red" <%= checked("R") %>>
+    <input type="checkbox" name="deck[color][]" value="R" id="Red" <%= checked(@deck, "R") %>>
     <label for="Red">Red</label>
-    <input type="checkbox" name="deck[color][]" value="U" id="Blue" <%= checked("B") %>>
+    <input type="checkbox" name="deck[color][]" value="U" id="Blue" <%= checked(@deck, "U") %>>
     <label for="Blue">Blue</label>
   </p>
 
