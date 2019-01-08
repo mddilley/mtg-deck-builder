@@ -50,7 +50,7 @@ class ApplicationController < Sinatra::Base
       response = Net::HTTP.get(uri)
       card = JSON.parse(response)
       if card["status"] == 404
-        puts card["details"] #Store details in card var to flash?
+        flash[:cardnotfound] = "#{card["details"]}. Please enter another card name."
         card = nil
       else
         add_card_attr(card)
