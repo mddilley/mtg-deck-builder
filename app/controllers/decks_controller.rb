@@ -49,22 +49,20 @@ class DecksController < ApplicationController
   patch '/decks/:id' do
     deck = Deck.find(params[:id])
     if is_loggedin? && (deck.user_id == current_user.id)
-      if params["deck"][:name].strip != ""
-        deck.update("name" => params["deck"][:name])
-      end
-      if params["deck"][:color] != ""
-        deck.update("color" => params["deck"][:color])
-      end
-      if params["deck"][:size].strip != ""
-        deck.update("size" => params["deck"][:size])
-      end
+      deck.update("name" => params["deck"][:name]) if params["deck"][:name].strip != ""
+      deck.update("color" => params["deck"][:color]) if params["deck"][:color] != ""
+      deck.update("size" => params["deck"][:size]) if params["deck"][:size].strip != ""
       if params["card"][:name] != ""
         card = create_card(params["card"]["name"])
-        deck.cards << card if card != nil && card_repl_limit(deck, card) && deck_is_full?(deck)
+        deck.cards << card if card != nil && card_repl_limit(deck, card) && !deck_is_full?(deck)
+        flash[:cardlimit] = "You may only add four copies of the same card to a single deck (except basic lands)." if !card_repl_limit(deck, card)
+        flash[:deckfull] = "Your deck is full. Please increase deck size to add more cards." if deck_is_full?(deck)
       elsif params["card"][:id] != ""
         card = Card.find(params["card"][:id])
-        deck.cards << card if card != nil && card_repl_limit(deck, card) && deck_is_full?(deck)
-      end
+        deck.cards << card if card != nil && card_repl_limit(deck, card) && !deck_is_full?(deck)
+        flash[:cardlimit] = "You may only add four copies of the same card to a single deck (except basic lands)." if !card_repl_limit(deck, card)
+        flash[:deckfull] = "Your deck is full. Please increase deck size to add more cards." if deck_is_full?(deck)
+      end  
       redirect to "/decks/#{params[:id]}"
     else
       redirect to "/users/login"

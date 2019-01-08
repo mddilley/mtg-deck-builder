@@ -100,7 +100,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def deck_is_full?(deck)
-      deck.cards.size < deck.size.to_i
+      deck.size.to_i <= deck.cards.size
     end
 
   end
