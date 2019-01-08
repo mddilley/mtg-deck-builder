@@ -18,11 +18,18 @@ class DecksController < ApplicationController
   end
 
   post '/decks' do
-    if is_loggedin?
+    if Deck.find_by("name" => params[:name])
+      flash[:duplicatedeck] = "A deck with that name already exists. Please choose another name."
+      redirect to "/decks"
+    end
+    if is_loggedin? && params[:name].strip != "" && params[:size].strip != ""
       @deck = Deck.create(params)
       @user = current_user
       @user.decks << @deck
       erb :"/decks/show"
+    elsif params[:name].strip == "" || params[:size].strip == ""
+      flash[:incomplete] = "Invalid input. Please fill out all fields and submit to create a new deck."
+      redirect to "/decks"
     else
       redirect to "/users/login"
     end
@@ -62,7 +69,7 @@ class DecksController < ApplicationController
         deck.cards << card if card != nil && card_repl_limit(deck, card) && !deck_is_full?(deck)
         flash[:cardlimit] = "You may only add four copies of the same card to a single deck (except basic lands)." if !card_repl_limit(deck, card)
         flash[:deckfull] = "Your deck is full. Please increase deck size to add more cards." if deck_is_full?(deck)
-      end  
+      end
       redirect to "/decks/#{params[:id]}"
     else
       redirect to "/users/login"
