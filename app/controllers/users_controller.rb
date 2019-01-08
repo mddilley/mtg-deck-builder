@@ -15,9 +15,12 @@ class UsersController < ApplicationController
         login(@user.id)
         erb :"/decks/index"
       else
-        flash[:invalidsignup] = "Invalid input. Please fill each field and submit to sign up."
+        flash[:invalidsignup] = "Invalid input. Please fill out all fields and submit to sign up."
         redirect to "/users/signup"
       end
+    elsif User.find_by("username" => params["username"])
+      flash[:invalidusername] = "This username is not available. Please choose another and submit to sign up."
+      redirect to "/users/signup"
     else
       redirect to "/"
     end
@@ -37,7 +40,7 @@ class UsersController < ApplicationController
       login(@user.id)
       erb :"/decks/index"
     else
-      flash[:invalidpw] = "Invalid password. Please enter your password to login."
+      !@user ? flash[:invaliduser] = "Invalid username. Please enter your correct username to login." : flash[:invalidpw] = "Invalid password. Please enter your correct password to login."
       redirect to "/users/login"
     end
   end
