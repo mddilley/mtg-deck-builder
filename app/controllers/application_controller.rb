@@ -38,40 +38,6 @@ class ApplicationController < Sinatra::Base
       User.find(session[:id])
     end
 
-    # Card helper methods
-
-    def card_name_to_search_name(name)
-      name.downcase.split.join("+")
-    end
-
-    def create_card(card_name)
-      url = "https://api.scryfall.com/cards/named?fuzzy=#{card_name_to_search_name(card_name)}"
-      uri = URI(url)
-      response = Net::HTTP.get(uri)
-      card = JSON.parse(response)
-      if card["status"] == 404
-        flash[:cardnotfound] = "#{card["details"]}. Please enter another card name."
-        card = nil
-      else
-        add_card_attr(card)
-      end
-    end
-
-    def add_card_attr(c)
-      Card.find_or_create_by("name" => c["name"]).tap { |card|
-        card.mana_cost = c["mana_cost"]
-        card.card_type = c["type_line"]
-        card.card_text = c["oracle_text"]
-        c["colors"] != [] ? card.colors = c["colors"] : card.colors = "[\"C\"]"
-        card.expansion = c["set_name"]
-        card.rarity = c["rarity"].capitalize
-        card.flavor_text = c["flavor_text"]
-        card.img_url = c["image_uris"]["border_crop"]
-        card.power = c["power"]
-        card.toughness = c["toughness"]
-      }
-    end
-
     def string_to_img_tag(string)
       <<-HTML
         <img height="15" width="15" src="/images/#{string}.png" alt="#{string} mana symbol">
@@ -86,8 +52,6 @@ class ApplicationController < Sinatra::Base
         i > 0 ? (0..i.to_i - 1).collect { string_to_img_tag("C") }.join : string_to_img_tag(s.gsub(/[{}]/,""))
       end
     end
-
-    # Deck helper methods
 
     def checked(deck, color)
       "checked" if deck.color != nil && deck.color.include?(color)

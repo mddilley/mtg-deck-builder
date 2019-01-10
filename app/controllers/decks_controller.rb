@@ -60,7 +60,7 @@ class DecksController < ApplicationController
       deck.update("color" => params["deck"][:color]) if params["deck"][:color] != ""
       deck.update("size" => params["deck"][:size]) if params["deck"][:size].strip != ""
       if params["card"][:name] != ""
-        card = create_card(params["card"]["name"])
+        card = Card.create_card(params["card"]["name"])
         deck.cards << card if card != nil && card_repl_limit(deck, card) && !deck_is_full?(deck)
         flash[:cardlimit] = "You may only add four copies of the same card to a single deck (except basic lands)." if !card_repl_limit(deck, card)
         flash[:deckfull] = "Your deck is full. Please increase deck size to add more cards." if deck_is_full?(deck)
