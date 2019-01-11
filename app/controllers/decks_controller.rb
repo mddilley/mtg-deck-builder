@@ -22,12 +22,11 @@ class DecksController < ApplicationController
       flash[:duplicatedeck] = "A deck with that name already exists. Please choose another name."
       redirect to "/decks"
     end
-    if is_loggedin? && valid_params?("&&")
-      @deck = Deck.create(params)
+    if is_loggedin? && valid_deck_params?("&&")
       @user = current_user
-      @user.decks << @deck
+      @deck = @user.decks.create(params)
       erb :"/decks/show"
-    elsif valid_params?("||")
+    elsif valid_deck_params?("||")
       flash[:incomplete] = "Invalid input. Please fill out all fields and submit to create a new deck."
       redirect to "/decks"
     else

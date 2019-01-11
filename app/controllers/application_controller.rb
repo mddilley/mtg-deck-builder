@@ -38,7 +38,7 @@ class ApplicationController < Sinatra::Base
       User.find(session[:id])
     end
 
-    def valid_params?(comparison_string)
+    def valid_deck_params?(comparison_string)
       if comparison_string == "&&"
         params[:name].strip != "" && params[:size].strip != ""
       elsif comparison_string == "||"
