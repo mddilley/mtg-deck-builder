@@ -32,16 +32,16 @@ class DecksController < ApplicationController
   get '/decks/:id/edit' do
     redirect_to_login?
     @deck = Deck.find(params[:id])
-    deck_owner?(@deck, "/decks/edit")  
+    deck_owner?(@deck, "/decks/edit")
   end
 
-  get '/decks/:id' do #
+  get '/decks/:id' do
     redirect_to_login?
     @deck = Deck.find(params[:id])
     deck_owner?(@deck, "/decks/show")
   end
 
-  patch '/decks/:id' do #
+  patch '/decks/:id' do
     redirect_to_login?
     deck = Deck.find(params[:id])
     if deck_owner?(deck)
@@ -50,8 +50,6 @@ class DecksController < ApplicationController
       flash[:cardlimit] = "You may only add four copies of the same card to a single deck (except basic lands)." if Deck.card_repl_limit?(deck, card)
       flash[:deckfull] = "Your deck is full. Please increase deck size to add more cards." if Deck.deck_is_full?(deck)
       redirect to "/decks/#{deck.id}"
-    else
-      redirect to "/decks"
     end
   end
 

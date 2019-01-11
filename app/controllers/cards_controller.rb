@@ -21,11 +21,9 @@ class CardsController < ApplicationController
     redirect_to_login?
     carddeck = CardDeck.find_by("card_id" => params[:id], "deck_id" => params[:deck_id])
     deck = Deck.find(params[:deck_id])
-    if deck.user_id == current_user.id
+    if deck_owner?(deck)
       carddeck.delete
       redirect to "/decks/#{deck.id}"
-    else
-      redirect to "/decks"
     end
   end
 
