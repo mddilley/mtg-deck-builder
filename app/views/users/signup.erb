@@ -1,24 +1,28 @@
-<p>
-  Choose a username and password, and enter your email below.
-</p>
-
-<form action="/users/signup" method="post">
+<div class="container">
 
   <p>
-    <label for="username">Username: </label>
-    <input type="text" name="username" id="username">
+    Choose a username and password, and enter your email below.
   </p>
 
-  <p>
-    <label for="password">Password: </label>
-    <input type="password" name="password" id="password">
-  </p>
+  <form action="/users/signup" method="post">
 
-  <p>
-    <label for="email">Email: </label>
-    <input type="email" name="email" id="email">
-  </p>
+    <p>
+      <label for="username">Username: </label>
+      <input type="text" name="username" id="username">
+    </p>
 
-  <input type="submit" value="Signup">
+    <p>
+      <label for="password">Password: </label>
+      <input type="password" name="password" id="password">
+    </p>
 
-</form>
+    <p>
+      <label for="email">Email: </label>
+      <input type="email" name="email" id="email">
+    </p>
+
+    <input type="submit" value="Signup">
+
+  </form>
+
+</div>

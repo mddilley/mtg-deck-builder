@@ -12,11 +12,14 @@
   </head>
   <body>
 
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+      <% if request.path_info != '/' && request.path_info != '/users/signup' && request.path_info != '/users/login' %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <% end %>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link <%= "active" if request.path_info == '/decks'%>" href="/decks"><%= "Your Decks" if is_loggedin? %><span class="sr-only">(current)</span></a>
@@ -67,6 +70,7 @@
 
   </body>
   <footer>
-
+    <br><br><br>
+    <div class="container">Built and designed by Mike Dilley in 2019. Report issues to <a href="mailto:mike.dilley@gmail.com?subject=feedback">mike.dilley@gmail.com</a></div>
   </footer>
 </html>
