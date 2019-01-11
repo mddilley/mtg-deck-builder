@@ -38,14 +38,6 @@ class ApplicationController < Sinatra::Base
       User.find(session[:id])
     end
 
-    def valid_deck_params?(comparison_string)
-      if comparison_string == "&&"
-        params[:name].strip != "" && params[:size].strip != ""
-      elsif comparison_string == "||"
-        params[:name].strip == "" || params[:size].strip == ""
-      end
-    end
-
     def string_to_img_tag(string)
       <<-HTML
         <img height="15" width="15" src="/images/#{string}.png" alt="#{string} mana symbol">

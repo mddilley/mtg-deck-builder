@@ -22,11 +22,11 @@ class DecksController < ApplicationController
       flash[:duplicatedeck] = "A deck with that name already exists. Please choose another name."
       redirect to "/decks"
     end
-    if is_loggedin? && valid_deck_params?("&&")
+    if is_loggedin? && Deck.valid_params?("&&", params)
       @user = current_user
       @deck = @user.decks.create(params)
       erb :"/decks/show"
-    elsif valid_deck_params?("||")
+    elsif Deck.valid_params?("||", params)
       flash[:incomplete] = "Invalid input. Please fill out all fields and submit to create a new deck."
       redirect to "/decks"
     else
@@ -55,9 +55,7 @@ class DecksController < ApplicationController
   patch '/decks/:id' do
     deck = Deck.find(params[:id])
     if is_loggedin? && (deck.user_id == current_user.id)
-      deck.update("name" => params["deck"][:name]) if params["deck"][:name].strip != ""
-      deck.update("color" => params["deck"][:color]) if params["deck"][:color] != ""
-      deck.update("size" => params["deck"][:size]) if params["deck"][:size].strip != ""
+      Deck.update_deck(deck, params)
       if params["card"][:name] != ""
         card = Card.create_card(params["card"]["name"])
         deck.cards << card if card != nil && card_repl_limit(deck, card) && !deck_is_full?(deck)
