@@ -32,21 +32,13 @@ class DecksController < ApplicationController
   get '/decks/:id/edit' do
     redirect_to_login?
     @deck = Deck.find(params[:id])
-    if @deck.user_id == current_user.id
-      erb :"/decks/edit"
-    else
-      redirect to "/decks"
-    end
+    deck_owner?(@deck, "/decks/edit")  
   end
 
   get '/decks/:id' do #
     redirect_to_login?
     @deck = Deck.find(params[:id])
-    if @deck.user_id == current_user.id
-      erb :"/decks/show"
-    else
-      redirect to "/decks"
-    end
+    deck_owner?(@deck, "/decks/show")
   end
 
   patch '/decks/:id' do #

@@ -45,8 +45,14 @@ class ApplicationController < Sinatra::Base
       User.find(session[:id])
     end
 
-    def deck_owner?(deck)
-      deck.user_id == current_user.id
+    def deck_owner?(deck, path_string = nil)
+      if path_string == nil
+        deck.user_id == current_user.id
+      elsif deck.user_id == current_user.id
+        erb :"#{path_string}"
+      else
+        redirect to "/decks"
+      end
     end
 
     def string_to_img_tag(string)
