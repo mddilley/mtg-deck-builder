@@ -9,20 +9,19 @@ class UsersController < ApplicationController
   end
 
   post '/users/signup' do
-    if !is_loggedin? && !User.find_by("username" => params["username"])
-      if params["username"] != "" && params["password"] != "" && params["email"] != ""
-        @user = User.create(params)
-        login(@user.id)
-        erb :"/decks/index"
-      else
-        flash[:invalidsignup] = "Invalid input. Please fill out all fields and submit to sign up."
-        redirect to "/users/signup"
-      end
-    elsif User.find_by("username" => params["username"])
+    if User.find_by("username" => params["username"])
       flash[:invalidusername] = "This username is not available. Please choose another and submit to sign up."
       redirect to "/users/signup"
+    elsif User.find_by("email" => params["email"])
+      flash[:invalidusername] = "This email is already associated with another username. Please choose another and submit to sign up."
+      redirect to "/users/signup"
+    elsif User.valid_params?(params)
+      @user = User.create(params)
+      login(@user.id)
+      erb :"/decks/index"
     else
-      redirect to "/"
+      flash[:invalidsignup] = "Invalid input. Please fill out all fields and submit to sign up."
+      redirect to "/users/signup"
     end
   end
 
