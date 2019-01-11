@@ -17,6 +17,6 @@ gem 'bcrypt'
 gem 'sinatra-flash'
 gem 'pg'
 
-group :development do
-  gem 'sqlite3'
-end
+# group :development do
+#   gem 'sqlite3'
+# end
