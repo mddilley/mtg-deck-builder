@@ -1,5 +1,7 @@
 class Deck < ActiveRecord::Base
 
+  CARD_REPL_LIMIT = 4
+
   has_many :card_decks
   has_many :cards, through: :card_decks
   belongs_to :user
@@ -20,7 +22,7 @@ class Deck < ActiveRecord::Base
 
   def self.card_repl_limit?(deck, card)
     exclude = ["Plains", "Swamp", "Island", "Swamp", "Mountain", "Forest"]
-    deck.cards.select {|c| c.name == card.name && !exclude.include?(card.name)}.size >= 4
+    deck.cards.select {|c| c.name == card.name && !exclude.include?(card.name)}.size >= CARD_REPL_LIMIT if card != nil
   end
 
   def self.deck_is_full?(deck)
