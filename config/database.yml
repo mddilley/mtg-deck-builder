@@ -6,9 +6,7 @@ development:
   timeout: 5000
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
   adapter: postgresql
-  database: mydb
-  host: localhost
+  database: my_production_db
   pool: 5
   timeout: 5000
