@@ -1,25 +1,23 @@
 class DecksController < ApplicationController
 
   get '/decks/new' do
-    if is_loggedin?
-      erb :"/decks/new"
-    else
-      redirect to "/users/login"
-    end
+    redirect_to_login?
+    erb :"/decks/new"
   end
 
   get '/decks' do
-    redirect_to_login
+    redirect_to_login?
     @user = current_user
     erb :"/decks/index"
   end
 
   post '/decks' do
+    redirect_to_login?
     if Deck.find_by("name" => params[:name])
       flash[:duplicatedeck] = "A deck with that name already exists. Please choose another name."
       redirect to "/decks"
     end
-    if is_loggedin? && Deck.valid_params?("&&", params)
+    if Deck.valid_params?("&&", params)
       @user = current_user
       @deck = @user.decks.create(params)
       erb :"/decks/show"
@@ -32,17 +30,19 @@ class DecksController < ApplicationController
   end
 
   get '/decks/:id/edit' do
+    redirect_to_login?
     @deck = Deck.find(params[:id])
-    if is_loggedin? && (@deck.user_id == current_user.id)
+    if @deck.user_id == current_user.id
       erb :"/decks/edit"
     else
-      redirect to "/users/login"
+      redirect to "/decks"
     end
   end
 
   get '/decks/:id' do
+    redirect_to_login?
     @deck = Deck.find(params[:id])
-    if is_loggedin? && (@deck.user_id == current_user.id)
+    if @deck.user_id == current_user.id
       erb :"/decks/show"
     else
       redirect to "/decks"
@@ -50,8 +50,9 @@ class DecksController < ApplicationController
   end
 
   patch '/decks/:id' do
+    redirect_to_login?
     deck = Deck.find(params[:id])
-    if is_loggedin? && (deck.user_id == current_user.id)
+    if deck.user_id == current_user.id
       Deck.update_deck(deck, params)
       card = Deck.add_card_to_deck(deck, params)
       flash[:cardlimit] = "You may only add four copies of the same card to a single deck (except basic lands)." if !Deck.card_repl_limit(deck, card)
@@ -63,8 +64,9 @@ class DecksController < ApplicationController
   end
 
   delete '/decks/:id' do
+    redirect_to_login?
     deck = Deck.find(params[:id])
-    if is_loggedin? && (deck.user_id == current_user.id)
+    if deck.user_id == current_user.id
       deck.delete
       redirect to "/decks"
     else
