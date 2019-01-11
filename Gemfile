@@ -15,5 +15,4 @@ gem 'shotgun'
 gem 'tux'
 gem 'bcrypt'
 gem 'sinatra-flash'
-gem 'pg'
-gem 'sqlite3', :group => :development
+gem 'pg', :group => :production

@@ -6,14 +6,14 @@ require 'json'
 require 'sinatra'
 require 'sinatra/flash'
 
-configure :development do
-  ENV['SINATRA_ENV'] ||= "development"
-
-  ActiveRecord::Base.establish_connection(
-    :adapter => "sqlite3",
-    :database => "db/development.sqlite3"
-  )
-end
+# configure :development do
+#   ENV['SINATRA_ENV'] ||= "development"
+#
+#   ActiveRecord::Base.establish_connection(
+#     :adapter => "sqlite3",
+#     :database => "db/development.sqlite3"
+#   )
+# end
 
 configure :production do
    db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
