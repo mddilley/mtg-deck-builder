@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2018_12_29_164446) do
 
   create_table "decks", force: :cascade do |t|
     t.string "name"
-    t.string "size"
+    t.integer "size"
     t.string "color"
     t.integer "user_id"
   end
