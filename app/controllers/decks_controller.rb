@@ -11,21 +11,18 @@ class DecksController < ApplicationController
     erb :"/decks/index"
   end
 
-  post '/decks' do #
+  post '/decks' do
     redirect_to_login?
     if Deck.find_by("name" => params[:name])
       flash[:duplicatedeck] = "A deck with that name already exists. Please choose another name."
       redirect to "/decks"
-    end
-    if Deck.valid_params?("&&", params)
+    elsif Deck.valid_params?("&&", params)
       @user = current_user
       @deck = @user.decks.create(params)
       erb :"/decks/show"
     elsif Deck.valid_params?("||", params)
       flash[:incomplete] = "Invalid input. Please fill out all fields and submit to create a new deck."
       redirect to "/decks"
-    else
-      redirect to "/users/login"
     end
   end
 
