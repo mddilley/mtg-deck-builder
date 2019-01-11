@@ -20,8 +20,6 @@ class ApplicationController < Sinatra::Base
 
   helpers do
 
-    # User helper methods
-
     def is_loggedin?
       !!session[:id]
     end
