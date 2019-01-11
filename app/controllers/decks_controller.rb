@@ -56,18 +56,10 @@ class DecksController < ApplicationController
     deck = Deck.find(params[:id])
     if is_loggedin? && (deck.user_id == current_user.id)
       Deck.update_deck(deck, params)
-      if params["card"][:name] != ""
-        card = Card.create_card(params["card"]["name"])
-        deck.cards << card if card != nil && card_repl_limit(deck, card) && !deck_is_full?(deck)
-        flash[:cardlimit] = "You may only add four copies of the same card to a single deck (except basic lands)." if !card_repl_limit(deck, card)
-        flash[:deckfull] = "Your deck is full. Please increase deck size to add more cards." if deck_is_full?(deck)
-      elsif params["card"][:id] != ""
-        card = Card.find(params["card"][:id])
-        deck.cards << card if card != nil && card_repl_limit(deck, card) && !deck_is_full?(deck)
-        flash[:cardlimit] = "You may only add four copies of the same card to a single deck (except basic lands)." if !card_repl_limit(deck, card)
-        flash[:deckfull] = "Your deck is full. Please increase deck size to add more cards." if deck_is_full?(deck)
-      end
-      redirect to "/decks/#{params[:id]}"
+      card = Deck.add_card_to_deck(deck, params)
+      flash[:cardlimit] = "You may only add four copies of the same card to a single deck (except basic lands)." if !Deck.card_repl_limit(deck, card)
+      flash[:deckfull] = "Your deck is full. Please increase deck size to add more cards." if Deck.deck_is_full?(deck)
+      redirect to "/decks/#{deck.id}"
     else
       redirect to "/users/login"
     end

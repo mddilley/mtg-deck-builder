@@ -57,15 +57,6 @@ class ApplicationController < Sinatra::Base
       "checked" if deck.color != nil && deck.color.include?(color)
     end
 
-    def card_repl_limit(deck, card)
-      exclude = ["Plains", "Swamp", "Island", "Swamp", "Mountain", "Forest"]
-      deck.cards.select {|c| c.name == card.name && !exclude.include?(card.name)}.size < 4
-    end
-
-    def deck_is_full?(deck)
-      deck.size.to_i <= deck.cards.size
-    end
-
   end
 
 end
