@@ -18,9 +18,9 @@ class Deck < ActiveRecord::Base
     deck.update("size" => params["deck"][:size]) if params["deck"][:size].strip != ""
   end
 
-  def self.card_repl_limit(deck, card)
+  def self.card_repl_limit?(deck, card)
     exclude = ["Plains", "Swamp", "Island", "Swamp", "Mountain", "Forest"]
-    deck.cards.select {|c| c.name == card.name && !exclude.include?(card.name)}.size < 4
+    deck.cards.select {|c| c.name == card.name && !exclude.include?(card.name)}.size >= 4
   end
 
   def self.deck_is_full?(deck)
@@ -30,11 +30,11 @@ class Deck < ActiveRecord::Base
   def self.add_card_to_deck(deck, params)
     if params["card"][:name] != ""
       Card.create_card(params["card"]["name"]).tap { |card|
-        deck.cards << card if card != nil && Deck.card_repl_limit(deck, card) && !Deck.deck_is_full?(deck)
+        deck.cards << card if card != nil && !Deck.card_repl_limit?(deck, card) && !Deck.deck_is_full?(deck)
       }
     elsif params["card"][:id] != ""
       Card.find(params["card"][:id]).tap { |card|
-        deck.cards << card if card != nil && Deck.card_repl_limit(deck, card) && !Deck.deck_is_full?(deck)
+        deck.cards << card if card != nil && !Deck.card_repl_limit?(deck, card) && !Deck.deck_is_full?(deck)
       }
     end
   end

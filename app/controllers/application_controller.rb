@@ -45,6 +45,10 @@ class ApplicationController < Sinatra::Base
       User.find(session[:id])
     end
 
+    def deck_owner?(deck)
+      deck.user_id == current_user.id
+    end
+
     def string_to_img_tag(string)
       <<-HTML
         <img height="15" width="15" src="/images/#{string}.png" alt="#{string} mana symbol">
