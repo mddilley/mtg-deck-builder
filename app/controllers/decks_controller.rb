@@ -9,12 +9,9 @@ class DecksController < ApplicationController
   end
 
   get '/decks' do
-    if is_loggedin?
-      @user = current_user
-      erb :"/decks/index"
-    else
-      redirect to "/users/login"
-    end
+    redirect_to_login
+    @user = current_user
+    erb :"/decks/index"
   end
 
   post '/decks' do

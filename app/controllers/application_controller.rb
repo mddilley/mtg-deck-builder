@@ -26,6 +26,13 @@ class ApplicationController < Sinatra::Base
       !!session[:id]
     end
 
+    def redirect_to_login
+      if !is_loggedin?
+        flash[:not_logged_in] = "Please login to continue."
+        redirect to "/users/login"
+      end
+    end
+
     def login(id)
       session[:id] = id
     end
