@@ -19,12 +19,13 @@ class CardsController < ApplicationController
 
   delete '/cards/:id/:deck_id' do
     redirect_to_login?
-    binding.pry
     carddeck = CardDeck.find_by("card_id" => params[:id], "deck_id" => params[:deck_id])
     deck = Deck.find(params[:deck_id])
     if deck_owner?(deck)
       carddeck.delete
       redirect to "/decks/#{deck.id}"
+    else
+      redirect to "/decks"
     end
   end
 

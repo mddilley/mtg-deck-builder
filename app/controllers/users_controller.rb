@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     elsif User.valid_params?(params)
       @user = User.create(params)
       login(@user.id)
-      erb :"/decks/index"
+      erb :"/decks/index" #redirect
     else
       flash[:invalidsignup] = "Invalid input. Please fill out all fields and submit to sign up."
       redirect to "/users/signup"

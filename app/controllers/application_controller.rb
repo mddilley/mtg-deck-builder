@@ -43,7 +43,7 @@ class ApplicationController < Sinatra::Base
       User.find(session[:id])
     end
 
-    def deck_owner?(deck, path_string = nil)
+    def deck_owner?(deck, path_string = nil) #refactor into two separate methods
       if path_string == nil
         deck.user_id == current_user.id
       elsif deck.user_id == current_user.id
