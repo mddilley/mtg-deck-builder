@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :cards, through: :decks
 
   def self.valid_params?(params)
-    params["username"] != "" && params["password"] != "" && params["email"] != ""
+    params.each.select {|k,v| v == "" } == []
   end
-  
+
 end
